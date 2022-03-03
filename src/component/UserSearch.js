@@ -1,15 +1,16 @@
 import React from "react";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+const { Search } = Input;
 
-const UserSearch = ({ value, onchange }) => {
+const UserSearch = ({ onSearch }) => {
+  // const onSearch = (value) => console.log(value);
   return (
-    <Input
-      placeholder="Search user..."
-      style={{ width: "100%" }}
-      suffix={<SearchOutlined />}
-      value={value}
-      onChange={onchange}
+    <Search
+      placeholder="input search text"
+      onSearch={onSearch}
+      style={{ width: 200 }}
+      enterButton
     />
   );
 };

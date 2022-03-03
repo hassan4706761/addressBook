@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { userApi } from "./Api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Card, Col, Row, Layout, Menu, Breadcrumb } from "antd";
 import UserCard from "./UserCard";
 import UserModal from "./UserModal";
 import "../styles/userPage.less";
+import { userContext } from "../App";
 
 const { Header, Content, Footer } = Layout;
 
@@ -23,9 +24,11 @@ const GetUsers = () => {
     cell: "",
     phone: "",
   });
+  const { nationality, searchText } = useContext(userContext);
+  console.log("===============>////////", searchText);
 
   useEffect(() => {
-    userApi(setData, count, data, setHasMore);
+    userApi(setData, count, data, setHasMore, nationality);
   }, []);
 
   const callUsers = () => {
@@ -33,10 +36,12 @@ const GetUsers = () => {
       userApi(setData, count, data, setHasMore);
     }, 200);
   };
-  const onChangeSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
+  const filteredPersons = data.filter((person) => {
+    return (
+      person.name?.first.toLowerCase().includes(searchText.toLowerCase()) ||
+      person.name?.last.toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
   return (
     <Content
       className="site-layout"
@@ -54,44 +59,85 @@ const GetUsers = () => {
         }
       >
         <Row gutter={10} style={{ padding: "30px" }}>
-          {data.map((item, index) => {
-            return (
-              <Col key={index} span={4}>
-                <UserModal
-                  visible={visibleModal}
-                  onCancel={() => setVisibleModal(false)}
-                  id={id}
-                  streetName={location.streetName}
-                  streetNumber={location.streetNum}
-                  cell={location.cell}
-                  city={location.city}
-                  state={location.state}
-                  phone={location.phone}
-                />
+          {searchText === ""
+            ? data.map((item, index) => {
+                return (
+                  <Col key={index} span={4}>
+                    <UserModal
+                      visible={visibleModal}
+                      onCancel={() => setVisibleModal(false)}
+                      id={id}
+                      streetName={location.streetName}
+                      streetNumber={location.streetNum}
+                      cell={location.cell}
+                      city={location.city}
+                      state={location.state}
+                      phone={location.phone}
+                    />
 
-                <UserCard
-                  image={item?.picture?.large}
-                  fname={item?.name?.first}
-                  lname={item?.name?.last}
-                  username={item?.login?.username}
-                  email={item?.email}
-                  onCLick={() => {
-                    setVisibleModal(true);
-                    setId(item?.login?.uuid);
-                    setLocation({
-                      streetNum: (item?.location?.street?.number).toString(),
-                      streetName: item?.location?.street?.name,
-                      city: item?.location?.city,
-                      state: item?.location?.state,
-                      postcode: (item?.location?.postcode).toString(),
-                      cell: item?.cell,
-                      phone: item?.phone,
-                    });
-                  }}
-                />
-              </Col>
-            );
-          })}
+                    <UserCard
+                      image={item?.picture?.large}
+                      fname={item?.name?.first}
+                      lname={item?.name?.last}
+                      username={item?.login?.username}
+                      email={item?.email}
+                      onCLick={() => {
+                        setVisibleModal(true);
+                        setId(item?.login?.uuid);
+                        setLocation({
+                          streetNum:
+                            (item?.location?.street?.number).toString(),
+                          streetName: item?.location?.street?.name,
+                          city: item?.location?.city,
+                          state: item?.location?.state,
+                          postcode: (item?.location?.postcode).toString(),
+                          cell: item?.cell,
+                          phone: item?.phone,
+                        });
+                      }}
+                    />
+                  </Col>
+                );
+              })
+            : filteredPersons.map((item, index) => {
+                return (
+                  <Col key={index} span={4}>
+                    <UserModal
+                      visible={visibleModal}
+                      onCancel={() => setVisibleModal(false)}
+                      id={id}
+                      streetName={location.streetName}
+                      streetNumber={location.streetNum}
+                      cell={location.cell}
+                      city={location.city}
+                      state={location.state}
+                      phone={location.phone}
+                    />
+
+                    <UserCard
+                      image={item?.picture?.large}
+                      fname={item?.name?.first}
+                      lname={item?.name?.last}
+                      username={item?.login?.username}
+                      email={item?.email}
+                      onCLick={() => {
+                        setVisibleModal(true);
+                        setId(item?.login?.uuid);
+                        setLocation({
+                          streetNum:
+                            (item?.location?.street?.number).toString(),
+                          streetName: item?.location?.street?.name,
+                          city: item?.location?.city,
+                          state: item?.location?.state,
+                          postcode: (item?.location?.postcode).toString(),
+                          cell: item?.cell,
+                          phone: item?.phone,
+                        });
+                      }}
+                    />
+                  </Col>
+                );
+              })}
         </Row>
       </InfiniteScroll>
     </Content>
