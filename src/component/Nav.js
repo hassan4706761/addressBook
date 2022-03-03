@@ -8,7 +8,7 @@ const Nav = () => {
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
         <Menu.Item key="/">
-          <Link to="/">home</Link>
+          <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item key="settings">
           <Link to="/setting">Settings</Link>
