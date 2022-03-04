@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { userApi } from "./Api";
+import { userApi } from "../Services/Api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Card, Col, Row, Layout, Menu, Breadcrumb } from "antd";
-import UserCard from "./UserCard";
-import UserModal from "./UserModal";
+import UserCard from "../component/UserCard";
+import UserModal from "../component/UserModal";
 import "../styles/userPage.less";
 import { userContext } from "../App";
 
@@ -62,7 +62,7 @@ const GetUsers = () => {
           {searchText === ""
             ? data.map((item, index) => {
                 return (
-                  <Col key={index} span={4}>
+                  <Col key={index} span={4} style={{ height: "420px" }}>
                     <UserModal
                       visible={visibleModal}
                       onCancel={() => setVisibleModal(false)}

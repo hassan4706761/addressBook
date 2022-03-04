@@ -1,9 +1,9 @@
 import React, { createContext, useState } from "react";
-import GetUsers from "./component/GetUsers";
+import GetUsers from "./Container/GetUsers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Nav from "./component/Nav";
+import Nav from "./Container/Nav";
 import { Layout } from "antd";
-import SettingsComp from "./component/SettingsComp";
+import SettingsComp from "./Container/SettingsComp";
 
 export const userContext = createContext("default value");
 

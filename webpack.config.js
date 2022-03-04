@@ -4,9 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
   entry: path.join(__dirname, "src", "index.js"),
-  output: {
-    path: path.resolve(__dirname, "dist"),
-  },
+
   module: {
     rules: [
       {
@@ -41,20 +39,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader", // translates CSS into CommonJS
-          },
-          {
-            loader: "sass-loader", // compiles Less to CSS
-          },
-        ],
-      },
     ],
   },
   resolve: {
@@ -70,5 +54,6 @@ module.exports = {
     port: 8080,
     historyApiFallback: true,
     open: true,
+    hot: true,
   },
 };

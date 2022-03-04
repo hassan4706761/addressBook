@@ -3,7 +3,7 @@ import { Layout, Menu, Anchor } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
 import { userContext } from "../App";
-import UserSearch from "./UserSearch";
+import UserSearch from "../component/UserSearch";
 
 const Nav = () => {
   const { searchText, setSearchText } = useContext(userContext);
