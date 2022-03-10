@@ -1,14 +1,15 @@
-import React, { useContext, useState } from "react";
-import { Layout, Menu, Anchor } from "antd";
-import { Content, Header } from "antd/es/layout/layout";
+import React from "react";
+import { Menu } from "antd";
+import { Header } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
-import { userContext } from "../App";
 import UserSearch from "../component/UserSearch";
+import { setUserSearch } from "../Redux/Actions/UserDataActions";
+import { useDispatch } from "react-redux";
 
 const Nav = () => {
-  const { searchText, setSearchText } = useContext(userContext);
+  const dispatch = useDispatch();
   const onSearchHandler = (value) => {
-    setSearchText(value);
+    dispatch(setUserSearch(value));
   };
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>

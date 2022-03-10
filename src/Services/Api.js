@@ -1,23 +1,11 @@
 const axios = require("axios");
 
-export const userApi = (setData, count, data, setHasMore, nationality) => {
-  if (data.length < 100) {
-    console.log("length", data.length);
+export const userApi = async (pageNum, nationality, result) => {
+  console.log(pageNum, nationality, result);
 
-    if (nationality === "") {
-      axios.get(`https://randomuser.me/api/?results=${count}`).then((res) => {
-        console.log(res?.data?.results);
-        setData((d) => d.concat(res?.data?.results));
-      });
-    } else {
-      axios
-        .get(`https://randomuser.me/api/?results=${count}&nat=${nationality}`)
-        .then((res) => {
-          console.log(res?.data?.results);
-          setData((d) => d.concat(res?.data?.results));
-        });
-    }
-  } else {
-    setHasMore(false);
-  }
+  const UserData = await axios.get(
+    `https://randomuser.me/api/?&page=${pageNum}&nat=${nationality}&results=${result}`
+  );
+
+  return { data: UserData?.data?.results };
 };

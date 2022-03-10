@@ -1,18 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Content } from "antd/es/layout/layout";
 import { Col, Radio, Row } from "antd";
-import { userApi } from "../Services/Api";
-import { userContext } from "../App";
 import Title from "antd/es/typography/Title";
+import { useDispatch, useSelector } from "react-redux";
+import { setNationality } from "../Redux/Actions/UserDataActions";
+import GetUsers from "./GetUsers";
 
 const SettingsComp = () => {
-  const { setNationality } = useContext(userContext);
-  const [value, setValue] = useState("");
+  const dispatch = useDispatch();
+  const nat = useSelector((state) => state.userInfo.nationality);
+
+  const [value, setValue] = useState(nat);
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
-    setNationality(e.target.value);
+    dispatch(setNationality(e.target.value));
   };
 
   console.log("radio value", value);
