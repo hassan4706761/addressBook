@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Col, Row, Layout } from "antd";
-import UserCard from "../component/UserCard";
-import UserModal from "../component/UserModal";
+import UserCard from "../Component/UserCard";
+import UserModal from "../Component/UserModal";
 import "../styles/userPage.less";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import ObserverDiv from "../component/ObserverDiv";
+import ObserverDiv from "../Component/ObserverDiv";
 import { getUserData } from "../Redux/Actions/UserDataActions";
 
 const { Content } = Layout;
@@ -24,11 +24,15 @@ const GetUsers = () => {
     phone: "",
   });
   const dispatch = useDispatch();
+  const PageEnd = useRef();
+
   const userDatas = useSelector((state) => state.userInfo);
   const { pageNum, nationality, result, userData, search, isLoading } =
     userDatas;
 
   console.log("===============>////////", userDatas);
+
+  //==========================================================================
 
   useEffect(() => {
     dispatch(getUserData(pageNum, nationality, result));
@@ -39,7 +43,6 @@ const GetUsers = () => {
   }, [userData]);
 
   //===========================================================================
-  const PageEnd = useRef();
   useEffect(() => {
     if (pageNum <= 19) {
       const observer = new IntersectionObserver(
@@ -69,6 +72,8 @@ const GetUsers = () => {
       person.name?.last.toLowerCase().includes(search?.toLowerCase())
     );
   });
+
+  //======================================================
 
   return (
     <Content

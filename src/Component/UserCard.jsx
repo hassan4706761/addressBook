@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Space, Typography } from "antd";
-const { Title, Paragraph, Text, Link } = Typography;
+const { Paragraph } = Typography;
 
 const UserCard = ({ image, fname, lname, username, email, onCLick, index }) => {
   return (

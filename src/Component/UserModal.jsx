@@ -1,6 +1,6 @@
 import { Modal, Button, Typography, Row, Col, Space } from "antd";
 import React from "react";
-import "../styles/userPage.less"
+import "../styles/userPage.less";
 
 const { Title, Paragraph } = Typography;
 
@@ -15,7 +15,6 @@ const UserModal = ({
   city,
   state,
 }) => {
-  // console.log(streetName);
   return (
     <Modal
       title="More Details..."
@@ -30,7 +29,7 @@ const UserModal = ({
             <Col span={4} offset={2}>
               <Title level={4}>City:</Title>
             </Col>
-            <Col span={18} >
+            <Col span={18}>
               {" "}
               <Paragraph>{city}</Paragraph>
             </Col>

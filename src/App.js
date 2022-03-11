@@ -1,23 +1,16 @@
 import React from "react";
-import GetUsers from "./Container/GetUsers";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Nav from "./Container/Nav";
-import { Layout } from "antd";
-import SettingsComp from "./Container/SettingsComp";
+import HomePage from "./Pages/HomePage";
+import SettingsPage from "./Pages/SettingsPage";
 
 const App = () => {
   return (
-    <>
-      <Layout className="layout">
-        <Router>
-          <Nav />
-          <Routes>
-            <Route exact path="/" element={<GetUsers />} />
-            <Route exact path="/setting" element={<SettingsComp />} />,
-          </Routes>
-        </Router>
-      </Layout>
-    </>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/setting" element={<SettingsPage />} />,
+      </Routes>
+    </Router>
   );
 };
 export default App;

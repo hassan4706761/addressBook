@@ -4,7 +4,6 @@ import { Col, Radio, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useDispatch, useSelector } from "react-redux";
 import { setNationality } from "../Redux/Actions/UserDataActions";
-import GetUsers from "./GetUsers";
 
 const SettingsComp = () => {
   const dispatch = useDispatch();
