@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./Container/Nav";
 import { Layout } from "antd";
 import SettingsComp from "./Container/SettingsComp";
-import { Provider } from "react-redux";
-import Store from "./Store";
 
 const App = () => {
   return (

@@ -31,6 +31,10 @@ const GetUsers = () => {
   console.log("===============>////////", userDatas);
 
   useEffect(() => {
+    dispatch(getUserData(pageNum, nationality, result));
+  }, [nationality]);
+
+  useEffect(() => {
     setData([...data, ...userData]);
   }, [userData]);
 
