@@ -6,7 +6,8 @@ import { Layout } from "antd";
 const SettingsPage = () => {
   return (
     <Layout className="layout">
-      <Nav /> <SettingsComp />
+      <Nav />
+      <SettingsComp />
     </Layout>
   );
 };

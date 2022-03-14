@@ -1,5 +1,5 @@
 import React from "react";
-import GetUsers from "../Container/GetUsers";
+import Home from "../Container/Home";
 import Nav from "../Container/Nav";
 import { Layout } from "antd";
 
@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <Layout className="layout">
       <Nav />
-      <GetUsers />
+      <Home />
     </Layout>
   );
 };

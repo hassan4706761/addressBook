@@ -1,13 +1,12 @@
-import { Modal, Button, Typography, Row, Col, Space } from "antd";
+import { Modal, Typography, Row, Col, Space } from "antd";
 import React from "react";
-import "../styles/userPage.less";
+import "../Styles/userPage.less";
 
 const { Title, Paragraph } = Typography;
 
 const UserModal = ({
   visible,
   onCancel,
-  id,
   streetName,
   streetNumber,
   cell,
@@ -30,7 +29,6 @@ const UserModal = ({
               <Title level={4}>City:</Title>
             </Col>
             <Col span={18}>
-              {" "}
               <Paragraph>{city}</Paragraph>
             </Col>
           </Row>
@@ -39,7 +37,6 @@ const UserModal = ({
               <Title level={4}>State:</Title>
             </Col>
             <Col span={18}>
-              {" "}
               <Paragraph>{state}</Paragraph>
             </Col>
           </Row>
@@ -48,7 +45,6 @@ const UserModal = ({
               <Title level={4}>Phone:</Title>
             </Col>
             <Col span={18}>
-              {" "}
               <Paragraph>{phone}</Paragraph>
             </Col>
           </Row>
@@ -57,7 +53,6 @@ const UserModal = ({
               <Title level={4}>Cell:</Title>
             </Col>
             <Col span={18}>
-              {" "}
               <Paragraph>{cell}</Paragraph>
             </Col>
           </Row>
@@ -69,8 +64,8 @@ const UserModal = ({
               {" "}
               <Space size={"small"}>
                 <Paragraph>{streetNumber}</Paragraph>
-                <Paragraph>{streetName}</Paragraph>{" "}
-              </Space>{" "}
+                <Paragraph>{streetName}</Paragraph>
+              </Space>
             </Col>
           </Row>
         </Col>

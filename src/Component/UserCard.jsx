@@ -11,10 +11,10 @@ const UserCard = ({ image, fname, lname, username, email, onCLick, index }) => {
       onClick={onCLick}
     >
       <Space size={"small"}>
+        {index}
         <Paragraph> {fname}</Paragraph>
         <Paragraph>{lname}</Paragraph>
       </Space>
-      {index}
       <Paragraph>{email}</Paragraph>
       <Paragraph>{username}</Paragraph>
     </Card>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Col, Row, Layout } from "antd";
 import UserCard from "../Component/UserCard";
 import UserModal from "../Component/UserModal";
-import "../styles/userPage.less";
+import "../Styles/userPage.less";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ObserverDiv from "../Component/ObserverDiv";
@@ -10,7 +10,7 @@ import { getUserData } from "../Redux/Actions/UserDataActions";
 
 const { Content } = Layout;
 
-const GetUsers = () => {
+const Home = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [id, setId] = useState("");
   const [data, setData] = useState([]);
@@ -35,14 +35,15 @@ const GetUsers = () => {
   //==========================================================================
 
   useEffect(() => {
-    dispatch(getUserData(pageNum, nationality, result));
-  }, [nationality]);
-
-  useEffect(() => {
     setData([...data, ...userData]);
   }, [userData]);
 
+  useEffect(() => {
+    dispatch(getUserData(pageNum, nationality, result));
+  }, [nationality]);
+
   //===========================================================================
+
   useEffect(() => {
     if (pageNum <= 19) {
       const observer = new IntersectionObserver(
@@ -166,4 +167,4 @@ const GetUsers = () => {
   );
 };
 
-export default GetUsers;
+export default Home;

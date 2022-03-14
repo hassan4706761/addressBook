@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "antd";
 const { Search } = Input;
-import "../styles/userPage.less";
+import "../Styles/userPage.less";
 
 const UserSearch = ({ onSearch }) => {
   return (

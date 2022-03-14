@@ -61,9 +61,9 @@ export const getCacheData = (pageNum, nationality, result) => (dispatch) => {
 };
 export const getUserData =
   (pageNum, nationality, result) => (dispatch, getState) => {
-    const checkUsers = getState().userInfo.userData;
+    const UserState = getState().userInfo.userData;
     const cacheData = getState().userInfo.cacheData;
-    if (checkUsers.length > 1) {
+    if (UserState.length > 1) {
       dispatch(setCacheData(cacheData));
       if (pageNum < 20) {
         dispatch(beginApiCall());
