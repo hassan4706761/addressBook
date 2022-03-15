@@ -1,7 +1,7 @@
 import React from "react";
-import SettingsComp from "../Container/SettingsComp";
+import SettingsContainer from "../Container/SettingsContainer";
 
 const SettingsPage = () => {
-  return <SettingsComp />;
+  return <SettingsContainer />;
 };
 export default SettingsPage;
