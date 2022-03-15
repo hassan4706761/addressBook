@@ -13,8 +13,10 @@ const init = {
   cacheData: [],
   search: "",
   nationality: "ES",
-  pageNum: 1,
-  result: 20,
+  pagination: {
+    pageNum: 1,
+    perPage: 20,
+  },
   isLoading: false,
 };
 
@@ -45,8 +47,8 @@ const UserDataReducer = (state = init, action) => {
     case UPDATE_PAGE_NUM:
       return {
         ...state,
-        pageNum: state.pageNum + 1,
-        result: state.result,
+        pageNum: state.pagination.pageNum + 1,
+        perPage: state.pagination.perPage,
       };
     case SET_NATIONALITY:
       return {

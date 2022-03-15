@@ -26,21 +26,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const PageEnd = useRef();
 
-  const userDatas = useSelector((state) => state.userInfo);
-  const { pageNum, nationality, result, userData, search, isLoading } =
-    userDatas;
+  const userInfo = useSelector((state) => state.userInfo);
+  const { pagination, nationality, userData, search, isLoading } = userInfo;
+  const { pageNum, perPage } = pagination;
 
-  console.log("===============>////////", userDatas);
-
-  //==========================================================================
-
-  useEffect(() => {
-    setData([...data, ...userData]);
-  }, [userData]);
-
-  useEffect(() => {
-    dispatch(getUserData(pageNum, nationality, result));
-  }, [nationality]);
+  console.log("===============>////////", userInfo);
 
   //===========================================================================
 
@@ -49,7 +39,7 @@ const Home = () => {
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
-            dispatch(getUserData(pageNum, nationality, result));
+            dispatch(getUserData(pageNum, nationality, perPage));
           }
         },
         { threshold: 1 }
@@ -67,12 +57,25 @@ const Home = () => {
 
   //================================================
 
-  const filteredPersons = data?.filter((person) => {
-    return (
-      person.name?.first.toLowerCase().includes(search?.toLowerCase()) ||
-      person.name?.last.toLowerCase().includes(search?.toLowerCase())
-    );
-  });
+  useEffect(() => {
+    setData([...data, ...userData]);
+  }, [userData]);
+
+  //================================================
+
+  const handleDisplayModal = (item) => {
+    setVisibleModal(true);
+    setId(item?.login?.uuid);
+    setLocation({
+      streetNum: (item?.location?.street?.number).toString(),
+      streetName: item?.location?.street?.name,
+      city: item?.location?.city,
+      state: item?.location?.state,
+      postcode: (item?.location?.postcode).toString(),
+      cell: item?.cell,
+      phone: item?.phone,
+    });
+  };
 
   //======================================================
 
@@ -100,67 +103,69 @@ const Home = () => {
                   />
 
                   <UserCard
+                    data-testid="userCard"
                     image={item?.picture?.large}
-                    fname={item?.name?.first}
-                    lname={item?.name?.last}
+                    firstName={item?.name?.first}
+                    lastName={item?.name?.last}
                     username={item?.login?.username}
                     email={item?.email}
                     index={index}
-                    onCLick={() => {
-                      setVisibleModal(true);
-                      setId(item?.login?.uuid);
-                      setLocation({
-                        streetNum: (item?.location?.street?.number).toString(),
-                        streetName: item?.location?.street?.name,
-                        city: item?.location?.city,
-                        state: item?.location?.state,
-                        postcode: (item?.location?.postcode).toString(),
-                        cell: item?.cell,
-                        phone: item?.phone,
-                      });
-                    }}
+                    onCLick={() => handleDisplayModal(item)}
                   />
                 </Col>
               );
             })
-          : filteredPersons.map((item, index) => {
-              return (
-                <Col key={index} span={4}>
-                  <UserModal
-                    visible={visibleModal}
-                    onCancel={() => setVisibleModal(false)}
-                    id={id}
-                    streetName={location.streetName}
-                    streetNumber={location.streetNum}
-                    cell={location.cell}
-                    city={location.city}
-                    state={location.state}
-                    phone={location.phone}
-                  />
+          : data
+              .filter((person) => {
+                return (
+                  person.name?.first
+                    .toLowerCase()
+                    .includes(search?.toLowerCase()) ||
+                  person.name?.last
+                    .toLowerCase()
+                    .includes(search?.toLowerCase())
+                );
+              })
+              .map((item, index) => {
+                return (
+                  <Col key={index} span={4}>
+                    <UserModal
+                      visible={visibleModal}
+                      onCancel={() => setVisibleModal(false)}
+                      id={id}
+                      streetName={location.streetName}
+                      streetNumber={location.streetNum}
+                      cell={location.cell}
+                      city={location.city}
+                      state={location.state}
+                      phone={location.phone}
+                    />
 
-                  <UserCard
-                    image={item?.picture?.large}
-                    fname={item?.name?.first}
-                    lname={item?.name?.last}
-                    username={item?.login?.username}
-                    email={item?.email}
-                    onCLick={() => {
-                      setVisibleModal(true);
-                      setId(item?.login?.uuid);
-                      setLocation({
-                        streetNum: (item?.location?.street?.number).toString(),
-                        streetName: item?.location?.street?.name,
-                        city: item?.location?.city,
-                        state: item?.location?.state,
-                        postcode: (item?.location?.postcode).toString(),
-                        cell: item?.cell,
-                        phone: item?.phone,
-                      });
-                    }}
-                  />
-                </Col>
-              );
-            })}
+                    <UserCard
+                      data-testid="userCard"
+                      image={item?.picture?.large}
+                      firstName={item?.name?.first}
+                      lastName={item?.name?.last}
+                      username={item?.login?.username}
+                      email={item?.email}
+                      onCLick={() => {
+                        setVisibleModal(true);
+                        setId(item?.login?.uuid);
+                        setLocation({
+                          streetNum:
+                            (item?.location?.street?.number).toString(),
+                          streetName: item?.location?.street?.name,
+                          city: item?.location?.city,
+                          state: item?.location?.state,
+                          postcode: (item?.location?.postcode).toString(),
+                          cell: item?.cell,
+                          phone: item?.phone,
+                        });
+                      }}
+                    />
+                  </Col>
+                );
+              })}
       </Row>
       <ObserverDiv isLoading={isLoading} setObserve={PageEnd} />
     </Content>

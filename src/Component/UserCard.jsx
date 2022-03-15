@@ -2,7 +2,15 @@ import React from "react";
 import { Card, Space, Typography } from "antd";
 const { Paragraph } = Typography;
 
-const UserCard = ({ image, fname, lname, username, email, onCLick, index }) => {
+const UserCard = ({
+  image,
+  firstName,
+  lastName,
+  username,
+  email,
+  onCLick,
+  index,
+}) => {
   return (
     <Card
       hoverable
@@ -11,12 +19,12 @@ const UserCard = ({ image, fname, lname, username, email, onCLick, index }) => {
       onClick={onCLick}
     >
       <Space size={"small"}>
-        {index}
-        <Paragraph> {fname}</Paragraph>
-        <Paragraph>{lname}</Paragraph>
+        <Paragraph> {firstName}</Paragraph>
+        <Paragraph>{lastName}</Paragraph>
       </Space>
       <Paragraph>{email}</Paragraph>
       <Paragraph>{username}</Paragraph>
+      {index}
     </Card>
   );
 };

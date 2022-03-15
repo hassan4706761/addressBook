@@ -20,16 +20,16 @@ export const setUserData = (userdata) => {
     payload: userdata,
   };
 };
-export const afterSetCacheData = (cachedata) => {
+export const afterSetCacheData = (cacheData) => {
   return {
     type: AFTER_SET_CACHE_DATA,
-    payload: cachedata,
+    payload: cacheData,
   };
 };
-export const setCacheData = (cachedata) => {
+export const setCacheData = (cacheData) => {
   return {
     type: SET_CACHE_DATA,
-    payload: cachedata,
+    payload: cacheData,
   };
 };
 export const setNationality = (nationality) => {
