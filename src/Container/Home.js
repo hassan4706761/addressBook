@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ObserverDiv from "../Component/ObserverDiv";
 import { getUserData } from "../Redux/Actions/UserDataActions";
-import Nav from "../Common/Nav";
+import NavBar from "../Common/NavBar";
 
 const { Content } = Layout;
 
@@ -81,8 +81,8 @@ const Home = () => {
   //======================================================
 
   return (
-    <Layout>
-      <Nav />
+    <>
+      <NavBar />
       <Content
         className="site-layout"
         style={{ padding: "0 50px", marginTop: 64 }}
@@ -172,7 +172,7 @@ const Home = () => {
         </Row>
         <ObserverDiv isLoading={isLoading} setObserve={PageEnd} />
       </Content>
-    </Layout>
+    </>
   );
 };
 

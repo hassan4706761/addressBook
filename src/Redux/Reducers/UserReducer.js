@@ -15,7 +15,7 @@ const init = {
   nationality: "ES",
   pagination: {
     pageNum: 1,
-    perPage: 20,
+    perPage: 50,
   },
   isLoading: false,
 };

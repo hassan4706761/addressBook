@@ -4,7 +4,7 @@ import { Col, Layout, Radio, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useDispatch, useSelector } from "react-redux";
 import { setNationality } from "../Redux/Actions/UserDataActions";
-import Nav from "../Common/Nav";
+import NavBar from "../Common/NavBar";
 
 const SettingsComp = () => {
   const dispatch = useDispatch();
@@ -19,8 +19,8 @@ const SettingsComp = () => {
 
   console.log("radio value", value);
   return (
-    <Layout>
-      <Nav />
+    <>
+      <NavBar />
       <Content
         className="site-layout"
         style={{ padding: "0 50px", marginTop: 64 }}
@@ -37,7 +37,7 @@ const SettingsComp = () => {
           </Col>
         </Row>
       </Content>
-    </Layout>
+    </>
   );
 };
 export default SettingsComp;
