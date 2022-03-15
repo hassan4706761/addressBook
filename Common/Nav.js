@@ -2,8 +2,8 @@ import React from "react";
 import { Menu } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { Link } from "react-router-dom";
-import UserSearch from "../Component/UserSearch";
-import { setUserSearch } from "../Redux/Actions/UserDataActions";
+import UserSearch from "../src/Component/UserSearch";
+import { setUserSearch } from "../src/Redux/Actions/UserDataActions";
 import { useDispatch } from "react-redux";
 
 const Nav = () => {

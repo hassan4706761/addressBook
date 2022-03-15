@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ObserverDiv from "../Component/ObserverDiv";
 import { getUserData } from "../Redux/Actions/UserDataActions";
+import Nav from "../../Common/Nav";
 
 const { Content } = Layout;
 
@@ -80,55 +81,18 @@ const Home = () => {
   //======================================================
 
   return (
-    <Content
-      className="site-layout"
-      style={{ padding: "0 50px", marginTop: 64 }}
-    >
-      <Row gutter={10} style={{ padding: "30px" }}>
-        {search === ""
-          ? userData &&
-            data.map((item, index) => {
-              return (
-                <Col key={index} span={4} style={{ height: "420px" }}>
-                  <UserModal
-                    visible={visibleModal}
-                    onCancel={() => setVisibleModal(false)}
-                    id={id}
-                    streetName={location.streetName}
-                    streetNumber={location.streetNum}
-                    cell={location.cell}
-                    city={location.city}
-                    state={location.state}
-                    phone={location.phone}
-                  />
-
-                  <UserCard
-                    data-testid="userCard"
-                    image={item?.picture?.large}
-                    firstName={item?.name?.first}
-                    lastName={item?.name?.last}
-                    username={item?.login?.username}
-                    email={item?.email}
-                    index={index}
-                    onCLick={() => handleDisplayModal(item)}
-                  />
-                </Col>
-              );
-            })
-          : data
-              .filter((person) => {
+    <Layout>
+      <Nav />
+      <Content
+        className="site-layout"
+        style={{ padding: "0 50px", marginTop: 64 }}
+      >
+        <Row gutter={10} style={{ padding: "30px" }}>
+          {search === ""
+            ? userData &&
+              data.map((item, index) => {
                 return (
-                  person.name?.first
-                    .toLowerCase()
-                    .includes(search?.toLowerCase()) ||
-                  person.name?.last
-                    .toLowerCase()
-                    .includes(search?.toLowerCase())
-                );
-              })
-              .map((item, index) => {
-                return (
-                  <Col key={index} span={4}>
+                  <Col key={index} span={4} style={{ height: "420px" }}>
                     <UserModal
                       visible={visibleModal}
                       onCancel={() => setVisibleModal(false)}
@@ -148,27 +112,67 @@ const Home = () => {
                       lastName={item?.name?.last}
                       username={item?.login?.username}
                       email={item?.email}
-                      onCLick={() => {
-                        setVisibleModal(true);
-                        setId(item?.login?.uuid);
-                        setLocation({
-                          streetNum:
-                            (item?.location?.street?.number).toString(),
-                          streetName: item?.location?.street?.name,
-                          city: item?.location?.city,
-                          state: item?.location?.state,
-                          postcode: (item?.location?.postcode).toString(),
-                          cell: item?.cell,
-                          phone: item?.phone,
-                        });
-                      }}
+                      index={index}
+                      onCLick={() => handleDisplayModal(item)}
                     />
                   </Col>
                 );
-              })}
-      </Row>
-      <ObserverDiv isLoading={isLoading} setObserve={PageEnd} />
-    </Content>
+              })
+            : data
+                .filter((person) => {
+                  return (
+                    person.name?.first
+                      .toLowerCase()
+                      .includes(search?.toLowerCase()) ||
+                    person.name?.last
+                      .toLowerCase()
+                      .includes(search?.toLowerCase())
+                  );
+                })
+                .map((item, index) => {
+                  return (
+                    <Col key={index} span={4}>
+                      <UserModal
+                        visible={visibleModal}
+                        onCancel={() => setVisibleModal(false)}
+                        id={id}
+                        streetName={location.streetName}
+                        streetNumber={location.streetNum}
+                        cell={location.cell}
+                        city={location.city}
+                        state={location.state}
+                        phone={location.phone}
+                      />
+
+                      <UserCard
+                        data-testid="userCard"
+                        image={item?.picture?.large}
+                        firstName={item?.name?.first}
+                        lastName={item?.name?.last}
+                        username={item?.login?.username}
+                        email={item?.email}
+                        onCLick={() => {
+                          setVisibleModal(true);
+                          setId(item?.login?.uuid);
+                          setLocation({
+                            streetNum:
+                              (item?.location?.street?.number).toString(),
+                            streetName: item?.location?.street?.name,
+                            city: item?.location?.city,
+                            state: item?.location?.state,
+                            postcode: (item?.location?.postcode).toString(),
+                            cell: item?.cell,
+                            phone: item?.phone,
+                          });
+                        }}
+                      />
+                    </Col>
+                  );
+                })}
+        </Row>
+        <ObserverDiv isLoading={isLoading} setObserve={PageEnd} />
+      </Content>
+    </Layout>
   );
 };
 

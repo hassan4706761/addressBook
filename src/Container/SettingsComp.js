@@ -4,6 +4,7 @@ import { Col, Radio, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useDispatch, useSelector } from "react-redux";
 import { setNationality } from "../Redux/Actions/UserDataActions";
+import Nav from "../../Common/Nav";
 
 const SettingsComp = () => {
   const dispatch = useDispatch();
@@ -18,22 +19,25 @@ const SettingsComp = () => {
 
   console.log("radio value", value);
   return (
-    <Content
-      className="site-layout"
-      style={{ padding: "0 50px", marginTop: 64 }}
-    >
-      <Row justify="center" align="middle">
-        <Col span={24}>
-          <Title>Select Nationality</Title>
-          <Radio.Group onChange={onChange} value={value}>
-            <Radio value={"CH"}>CH</Radio>
-            <Radio value={"ES"}>ES</Radio>
-            <Radio value={"FR"}>FR</Radio>
-            <Radio value={"GB"}>GB</Radio>
-          </Radio.Group>
-        </Col>
-      </Row>
-    </Content>
+    <Layout>
+      <Nav />
+      <Content
+        className="site-layout"
+        style={{ padding: "0 50px", marginTop: 64 }}
+      >
+        <Row justify="center" align="middle">
+          <Col span={24}>
+            <Title>Select Nationality</Title>
+            <Radio.Group onChange={onChange} value={value}>
+              <Radio value={"CH"}>CH</Radio>
+              <Radio value={"ES"}>ES</Radio>
+              <Radio value={"FR"}>FR</Radio>
+              <Radio value={"GB"}>GB</Radio>
+            </Radio.Group>
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   );
 };
 export default SettingsComp;
