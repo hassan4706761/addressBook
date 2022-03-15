@@ -1,12 +1,22 @@
-.ant-modal-mask{
-  background-color: rgba(0, 0, 0, 0.1) !important;
+@backgroundColor : #001529;
+
+.bordered{
+  border-radius: 10px;
 }
-.ant-modal-content {
-  box-shadow: none;
+.mixin(@color,@height:400px){
+  background-color: @color;
+  height: @height;
 }
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-  background-color: #001529 !important;
+  background-color: @backgroundColor !important;
 }
 .ant-input-wrapper{
   margin-top: 16px;
+}
+.userCard{
+  .bordered();
+  .mixin(#E6E6E6)
+}
+.userCardImage{
+  padding: 10px;
 }

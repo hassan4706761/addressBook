@@ -14,9 +14,9 @@ const UserCard = ({
   return (
     <Card
       hoverable
-      cover={<img alt="example" src={image} />}
-      style={{ height: "400px" }}
+      cover={<img className="userCardImage" alt="example" src={image} />}
       onClick={onCLick}
+      className="userCard"
     >
       <Space size={"small"}>
         <Paragraph> {firstName}</Paragraph>
@@ -24,7 +24,6 @@ const UserCard = ({
       </Space>
       <Paragraph>{email}</Paragraph>
       <Paragraph>{username}</Paragraph>
-      {index}
     </Card>
   );
 };

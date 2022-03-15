@@ -47,8 +47,10 @@ const UserDataReducer = (state = init, action) => {
     case UPDATE_PAGE_NUM:
       return {
         ...state,
-        pageNum: state.pagination.pageNum + 1,
-        perPage: state.pagination.perPage,
+        pagination: {
+          pageNum: state.pagination.pageNum + 1,
+          perPage: state.pagination.perPage,
+        },
       };
     case SET_NATIONALITY:
       return {

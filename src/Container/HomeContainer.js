@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, Row, Layout } from "antd";
+import { Col, Row } from "antd";
 import UserCard from "../Component/UserCard";
 import UserModal from "../Component/UserModal";
 import "../Styles/userPage.less";
@@ -7,9 +7,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ObserverDiv from "../Component/ObserverDiv";
 import { getUserData } from "../Redux/Actions/UserDataActions";
-import WholeLayout from "../Common/Layout";
-
-const { Content } = WholeLayout;
 
 const HomeContainer = () => {
   const [visibleModal, setVisibleModal] = useState(false);
@@ -30,8 +27,6 @@ const HomeContainer = () => {
   const userInfo = useSelector((state) => state.userInfo);
   const { pagination, nationality, userData, search, isLoading } = userInfo;
   const { pageNum, perPage } = pagination;
-
-  console.log("===============>////////", userInfo);
 
   //===========================================================================
 
@@ -82,24 +77,23 @@ const HomeContainer = () => {
 
   return (
     <>
+      <UserModal
+        visible={visibleModal}
+        onCancel={() => setVisibleModal(false)}
+        id={id}
+        streetName={location.streetName}
+        streetNumber={location.streetNum}
+        cell={location.cell}
+        city={location.city}
+        state={location.state}
+        phone={location.phone}
+      />
       <Row gutter={10} style={{ padding: "30px" }}>
         {search === ""
           ? userData &&
             data.map((item, index) => {
               return (
                 <Col key={index} span={4} style={{ height: "420px" }}>
-                  <UserModal
-                    visible={visibleModal}
-                    onCancel={() => setVisibleModal(false)}
-                    id={id}
-                    streetName={location.streetName}
-                    streetNumber={location.streetNum}
-                    cell={location.cell}
-                    city={location.city}
-                    state={location.state}
-                    phone={location.phone}
-                  />
-
                   <UserCard
                     data-testid="userCard"
                     image={item?.picture?.large}
@@ -127,18 +121,6 @@ const HomeContainer = () => {
               .map((item, index) => {
                 return (
                   <Col key={index} span={4}>
-                    <UserModal
-                      visible={visibleModal}
-                      onCancel={() => setVisibleModal(false)}
-                      id={id}
-                      streetName={location.streetName}
-                      streetNumber={location.streetNum}
-                      cell={location.cell}
-                      city={location.city}
-                      state={location.state}
-                      phone={location.phone}
-                    />
-
                     <UserCard
                       data-testid="userCard"
                       image={item?.picture?.large}
@@ -146,20 +128,8 @@ const HomeContainer = () => {
                       lastName={item?.name?.last}
                       username={item?.login?.username}
                       email={item?.email}
-                      onCLick={() => {
-                        setVisibleModal(true);
-                        setId(item?.login?.uuid);
-                        setLocation({
-                          streetNum:
-                            (item?.location?.street?.number).toString(),
-                          streetName: item?.location?.street?.name,
-                          city: item?.location?.city,
-                          state: item?.location?.state,
-                          postcode: (item?.location?.postcode).toString(),
-                          cell: item?.cell,
-                          phone: item?.phone,
-                        });
-                      }}
+                      index={index}
+                      onCLick={() => handleDisplayModal(item)}
                     />
                   </Col>
                 );

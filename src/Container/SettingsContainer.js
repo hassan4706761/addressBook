@@ -4,7 +4,6 @@ import { Col, Layout, Radio, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useDispatch, useSelector } from "react-redux";
 import { setNationality } from "../Redux/Actions/UserDataActions";
-import WholeLayout from "../Common/Layout";
 
 const SettingsContainer = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ const SettingsContainer = () => {
     dispatch(setNationality(e.target.value));
   };
 
-  console.log("radio value", value);
   return (
     <>
       <Row justify="center" align="middle">

@@ -7,7 +7,7 @@ import {
   UPDATE_PAGE_NUM,
   AFTER_SET_CACHE_DATA,
 } from "../Types";
-import { userApi } from "../../Services/Api";
+import { userApi } from "../../Services/HttpService";
 
 export const beginApiCall = () => {
   return {
@@ -50,9 +50,9 @@ export const updatePageNum = () => {
   };
 };
 
-export const getCacheData = (pageNum, nationality, result) => (dispatch) => {
+export const getCacheData = (pageNum, nationality, perPage) => (dispatch) => {
   try {
-    userApi(pageNum, nationality, result).then((response) => {
+    userApi(pageNum, nationality, perPage).then((response) => {
       dispatch(afterSetCacheData(response.data));
     });
   } catch (error) {
@@ -60,22 +60,22 @@ export const getCacheData = (pageNum, nationality, result) => (dispatch) => {
   }
 };
 export const getUserData =
-  (pageNum, nationality, result) => (dispatch, getState) => {
+  (pageNum, nationality, perPage) => (dispatch, getState) => {
     const UserState = getState().userInfo.userData;
     const cacheData = getState().userInfo.cacheData;
     if (UserState.length > 1) {
       dispatch(setCacheData(cacheData));
       if (pageNum < 20) {
         dispatch(beginApiCall());
-        dispatch(getCacheData(pageNum + 1, nationality, result));
+        dispatch(getCacheData(pageNum + 1, nationality, perPage));
       }
       dispatch(updatePageNum());
     } else {
       dispatch(beginApiCall());
       try {
-        userApi(pageNum, nationality, result).then((response) => {
+        userApi(pageNum, nationality, perPage).then((response) => {
           dispatch(setUserData(response.data));
-          dispatch(getCacheData(pageNum + 1, nationality, result));
+          dispatch(getCacheData(pageNum + 1, nationality, perPage));
         });
       } catch (error) {
         console.log(error);
