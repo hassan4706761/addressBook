@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Content } from "antd/es/layout/layout";
-import { Col, Radio, Row } from "antd";
+import { Col, Layout, Radio, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useDispatch, useSelector } from "react-redux";
 import { setNationality } from "../Redux/Actions/UserDataActions";
-import Nav from "../../Common/Nav";
+import Nav from "../Common/Nav";
 
 const SettingsComp = () => {
   const dispatch = useDispatch();

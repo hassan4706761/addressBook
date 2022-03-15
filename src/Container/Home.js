@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ObserverDiv from "../Component/ObserverDiv";
 import { getUserData } from "../Redux/Actions/UserDataActions";
-import Nav from "../../Common/Nav";
+import Nav from "../Common/Nav";
 
 const { Content } = Layout;
 
